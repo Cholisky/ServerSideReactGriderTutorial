@@ -1,0 +1,39 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    // allow both js and jsx
+    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
+
+    // configure React Link as a valid anchor
+    "jsx-a11y/anchor-is-valid": ["error", {"components": ["Link"], "specialLink": ["to"]}],
+
+    // label elements require either wrapping around input or a for/forHtml property, not both
+    "jsx-a11y/label-has-for": [
+      2, {
+        "components": ["Label"],
+        "required": {
+          "some": ["nesting", "id"]
+        },
+        "allowChildren": false
+      }
+    ],
+    // Since starting to use proptypes, default props are problematic and would cause worse failures without a lot of excess code.
+    "react/require-default-props": 0,
+
+    // allow single named export instead of demanding export default
+    "import/prefer-default-export": 0,
+
+    // allow extra long lines of code
+    "max-len": 0,
+
+    // allow non-named function expressions, except in recursive functions, where a name is needed
+    "func-names": [
+      "error",
+      "never"
+    ]
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  }
+}
