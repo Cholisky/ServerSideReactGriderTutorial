@@ -1,5 +1,6 @@
 import express from 'express';
-import { LISTEN_PORT } from './constants/ports';
+import { LISTEN_PORT } from './constants/network_constants';
+import createStore from './helpers/createStore';
 import renderer from './helpers/renderer';
 
 const app = express();
@@ -7,7 +8,13 @@ const app = express();
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-  res.send(renderer(req));
+  const store = createStore();
+
+  /**
+   * Logic to initialize and load data into the store
+   */
+
+  res.send(renderer(req, store));
 });
 
 app.listen(LISTEN_PORT, () => {

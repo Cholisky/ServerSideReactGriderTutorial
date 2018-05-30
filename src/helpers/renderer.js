@@ -1,14 +1,18 @@
+/* eslint-disable function-paren-newline */
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import Routes from '../client/Routes';
 
-export default (req) => {
-// eslint-disable-next-line function-paren-newline
+export default (req, store) => {
   const content = renderToString(
-    <StaticRouter location={req.path} context={{}}>
-      <Routes />
-    </StaticRouter>);
+    <Provider store={store}>
+      <StaticRouter location={req.path} context={{}}>
+        <Routes />
+      </StaticRouter>
+    </Provider>,
+  );
 
   return `
     <html>
