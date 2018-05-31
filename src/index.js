@@ -1,4 +1,6 @@
 import express from 'express';
+import { matchRoutes } from 'react-router-config';
+import Routes from './client/Routes';
 import { LISTEN_PORT } from './constants/network_constants';
 import createStore from './helpers/createStore';
 import renderer from './helpers/renderer';
@@ -10,11 +12,14 @@ app.use(express.static('public'));
 app.get('*', (req, res) => {
   const store = createStore();
 
-  /**
-   * Logic to initialize and load data into the store
-   */
+  // eslint-disable-next-line arrow-body-style
+  const promises = matchRoutes(Routes, req.path).map(({ route }) => {
+    return route.loadData ? route.loadData(store) : null;
+  });
 
-  res.send(renderer(req, store));
+  Promise.all(promises).then(() => {
+    res.send(renderer(req, store));
+  });
 });
 
 app.listen(LISTEN_PORT, () => {

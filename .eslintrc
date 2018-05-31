@@ -18,7 +18,7 @@
       }
     ],
     // Since starting to use proptypes, default props are problematic and would cause worse failures without a lot of excess code.
-    "react/require-default-props": 0,
+//    "react/require-default-props": 0,
 
     // allow single named export instead of demanding export default
     "import/prefer-default-export": 0,

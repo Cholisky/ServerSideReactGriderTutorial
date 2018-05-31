@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { userActions } from '../actions';
 
 class UsersList extends Component {
   componentDidMount() {
-    this.props.actions.fetchUsers();
+    userActions.fetchUsers();
   }
 
   renderUsers() {
@@ -16,21 +15,23 @@ class UsersList extends Component {
   render() {
     return (
       <div>
-        Here is a big list of users:
+        Here is the list of users:
         <ul>{this.renderUsers()}</ul>
       </div>
     );
   }
 }
 
+// The users proptype handles both the actual expected input as well as the empty array,
+//  somehow without airbnb eslint pitching a fit about using the array proptype.  Calling that a win.
 UsersList.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-  })),
-  actions: PropTypes.shape({
-    fetchUsers: PropTypes.func.isRequired,
-  }).isRequired,
+  users: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    })),
+    PropTypes.array.isRequired,
+  ]).isRequired,
 };
 
 function mapStateToProps(state) {
@@ -39,12 +40,9 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({
-      fetchUsers: userActions.fetchUsers,
-    }, dispatch),
-  };
+function loadData(store) {
+  return store.dispatch(userActions.fetchUsers());
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersList);
+export { loadData };
+export default connect(mapStateToProps, { fetchUsers: userActions.fetchUsers })(UsersList);
