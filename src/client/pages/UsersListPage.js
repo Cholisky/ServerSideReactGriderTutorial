@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { userActions } from '../actions';
+import { userActions } from '../actions/index';
 
-class UsersList extends Component {
+class UsersListPage extends Component {
   componentDidMount() {
-    userActions.fetchUsers();
+    this.props.fetchUsers();
   }
 
   renderUsers() {
@@ -24,7 +24,7 @@ class UsersList extends Component {
 
 // The users proptype handles both the actual expected input as well as the empty array,
 //  somehow without airbnb eslint pitching a fit about using the array proptype.  Calling that a win.
-UsersList.propTypes = {
+UsersListPage.propTypes = {
   users: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -32,6 +32,7 @@ UsersList.propTypes = {
     })),
     PropTypes.array.isRequired,
   ]).isRequired,
+  fetchUsers: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -44,5 +45,8 @@ function loadData(store) {
   return store.dispatch(userActions.fetchUsers());
 }
 
-export { loadData };
-export default connect(mapStateToProps, { fetchUsers: userActions.fetchUsers })(UsersList);
+
+export default {
+  component: connect(mapStateToProps, { fetchUsers: userActions.fetchUsers })(UsersListPage),
+  loadData,
+};

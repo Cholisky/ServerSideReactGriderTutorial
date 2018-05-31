@@ -1,3 +1,3 @@
-export const USER_TYPES = {
+export const TYPES_USERS = {
   FETCH: 'fetch_users',
 };

@@ -1,12 +1,12 @@
 import 'babel-polyfill';
-import { USER_TYPES } from '../../constants/types';
+import { TYPES_USERS } from '../../constants/types';
 import { HTTP_USERS } from '../../http';
 
 const fetchUsers = () => async (dispatch) => {
   const res = await HTTP_USERS.get();
 
   dispatch({
-    type: USER_TYPES.FETCH,
+    type: TYPES_USERS.FETCH,
     payload: res,
   });
 };
