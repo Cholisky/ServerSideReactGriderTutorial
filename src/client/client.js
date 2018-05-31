@@ -1,4 +1,6 @@
 // Startup point for the client side application
+// Normally called index.js but renamed for clarity in this exersize
+import axios from 'axios';
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -10,7 +12,17 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 import Routes from './Routes';
 
-const store = createStore(reducers, window.INITIAL_STATE, applyMiddleware(thunk));
+const axiosInstance = axios.create({
+  baseURL: '/api',
+});
+
+const store = createStore(
+  reducers,
+  window.INITIAL_STATE,
+  applyMiddleware(thunk.withExtraArgument(axiosInstance)),
+);
+
+console.log('client.js store: ', store);
 
 ReactDOM.hydrate(
   <Provider store={store}>

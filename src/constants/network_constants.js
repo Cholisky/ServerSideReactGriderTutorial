@@ -12,24 +12,14 @@ export const LISTEN_PORT = 3500;
  */
 
 // API address
-const API_ADDRESS = 'https://react-ssr-api.herokuapp.com';
+export const API_ADDRESS = 'http://react-ssr-api.herokuapp.com';
 
 // API endpoints
-const USERS = '/users';
-const ADMINS = '/admin';
-const LOGOUT = '/logout';
-const AUTH = '/auth/google';
-const CURRENT_USER = '/current_user';
-
-export const API_USER_ENDPOINTS = {
-  USERS: `${API_ADDRESS}${USERS}`,
-  ADMINS: `${API_ADDRESS}${ADMINS}`,
-};
-
-export const API_AUTH_ENDPOINTS = {
-  LOGOUT: `${API_ADDRESS}${LOGOUT}`,
-  AUTH: `${API_ADDRESS}${AUTH}`,
-  CURRENT_USER: `${API_ADDRESS}${CURRENT_USER}`,
-
+export const ENDPOINTS = {
+  USERS: '/users',
+  ADMINS: '/admin',
+  LOGOUT: '/logout',
+  AUTH: '/auth/google',
+  CURRENT_USER: '/current_user',
 };
 
