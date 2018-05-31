@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import express from 'express';
 import proxy from 'express-http-proxy';
 import { matchRoutes } from 'react-router-config';
@@ -11,13 +12,16 @@ const app = express();
 // any request coming from the browser to the render server with a route that starts with /api
 // will be handled by the proxy
 // After API address, second proxy function is for this application only to do with Google oAuth flow
-app.use('/api', proxy(API_ADDRESS, {
-  proxyReqOptDecorator(opts) {
-    // eslint-disable-next-line no-param-reassign
-    opts.headers['x-forward-host'] = `localhost:${LISTEN_PORT}`;
-    return opts;
-  },
-}));
+app.use(
+  '/api',
+  proxy(API_ADDRESS, {
+    proxyReqOptDecorator(opts) {
+      // eslint-disable-next-line no-param-reassign
+      opts.headers['x-forwarded-host'] = `localhost:${LISTEN_PORT}`;
+      return opts;
+    },
+  }),
+);
 
 app.use(express.static('public'));
 

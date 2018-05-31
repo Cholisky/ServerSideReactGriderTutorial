@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
     "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
-    "dev:build-server": "webpack --config webpack.server.js --watch",
-    "dev:build-client": "webpack --config webpack.client.js --watch"
+    "dev:build-server": "webpack --config webpack.server.js --watch --progress --profile --colors --display-error-details --display-cached",
+    "dev:build-client": "webpack --config webpack.client.js --watch --progress --profile --colors --display-error-details --display-cached"
   },
   "author": "",
   "license": "ISC",
@@ -36,6 +36,7 @@
     "react-redux": "5.0.6",
     "react-router-config": "1.0.0-beta.4",
     "react-router-dom": "4.2.2",
+    "react-router-prop-types": "^1.0.3",
     "redux": "3.7.2",
     "redux-thunk": "2.2.0",
     "serialize-javascript": "1.4.0",

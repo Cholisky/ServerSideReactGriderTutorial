@@ -1,5 +1,5 @@
 // listen port for the server
-export const LISTEN_PORT = 3500;
+export const LISTEN_PORT = 3000;
 
 /**
  my project manager's preferred way of formatting URLs as constants.
