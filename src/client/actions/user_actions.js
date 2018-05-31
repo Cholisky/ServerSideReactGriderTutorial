@@ -11,6 +11,7 @@ const fetchUsers = () => async (dispatch, getState, api) => {
       payload: res,
     });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log('user_actions error: ', error);
   }
 };

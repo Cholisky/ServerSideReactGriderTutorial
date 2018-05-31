@@ -23,6 +23,8 @@ app.use(express.static('public'));
 
 app.get('*', (req, res) => {
   const store = createStore(req);
+
+  // eslint-disable-next-line no-console
   console.log('src/index store: ', store);
   // eslint-disable-next-line arrow-body-style
   const promises = matchRoutes(Routes, req.path).map(({ route }) => {

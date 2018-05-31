@@ -22,6 +22,7 @@ const store = createStore(
   applyMiddleware(thunk.withExtraArgument(axiosInstance)),
 );
 
+// eslint-disable-next-line no-console
 console.log('client.js store: ', store);
 
 ReactDOM.hydrate(
