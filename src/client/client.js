@@ -1,5 +1,5 @@
 // Startup point for the client side application
-// Normally called index.js but renamed for clarity in this exersize
+// Normally called index.js but renamed for clarity in this exercise
 import axios from 'axios';
 import 'babel-polyfill';
 import React from 'react';
@@ -21,9 +21,6 @@ const store = createStore(
   window.INITIAL_STATE,
   applyMiddleware(thunk.withExtraArgument(axiosInstance)),
 );
-
-// eslint-disable-next-line no-console
-console.log('client.js store: ', store);
 
 ReactDOM.hydrate(
   <Provider store={store}>

@@ -4,16 +4,12 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import { authActions } from './actions';
 import Header from './components/Header';
 
-const App = ({ route }) => {
-  // eslint-disable-next-line no-console
-  console.log(route);
-  return (
-    <div>
-      <Header />
-      {renderRoutes(route.routes)}
-    </div>
-  );
-};
+const App = ({ route }) => (
+  <div>
+    <Header />
+    {renderRoutes(route.routes)}
+  </div>
+);
 
 App.propTypes = {
   route: ReactRouterPropTypes.route.isRequired,

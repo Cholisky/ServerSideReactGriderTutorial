@@ -1,13 +1,13 @@
 import 'babel-polyfill';
 import { ENDPOINTS } from '../../constants/network_constants';
-import { TYPES_AUTH } from '../../constants/types';
+import { TYPES_ADMINS } from '../../constants/types';
 
-const fetchCurrentUser = () => async (dispatch, getState, api) => {
+const fetchAdmins = () => async (dispatch, getState, api) => {
   try {
-    const res = await api.get(ENDPOINTS.CURRENT_USER);
+    const res = await api.get(ENDPOINTS.ADMINS);
 
     dispatch({
-      type: TYPES_AUTH.FETCH_CURRENT,
+      type: TYPES_ADMINS.FETCH,
       payload: res,
     });
   } catch (error) {
@@ -16,6 +16,6 @@ const fetchCurrentUser = () => async (dispatch, getState, api) => {
   }
 };
 
-export const authActions = {
-  fetchCurrentUser,
+export const adminActions = {
+  fetchAdmins,
 };

@@ -2,18 +2,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ROUTES } from '../../constants/network_constants';
 
 const Header = ({ auth }) => {
-  // eslint-disable-next-line react/jsx-curly-brace-presence
-  const authButton = auth ? <a href={'/api/logout'}> Logout</a> : <a href={'/api/auth/google'}>Login</a>;
+  const authButton = auth ? <a href={ROUTES.LOGOUT}> Logout</a> : <a href={ROUTES.LOGIN}>Login</a>;
 
   return (
     <nav>
       <div className="nav-wrapper">
-        <Link to="/" className="brand-logo">React SSR</Link>
+        <Link to={ROUTES.HOME} className="brand-logo">React SSR</Link>
         <ul className="right">
-          <li><Link to="/users">Users</Link></li>
-          <li><Link to="/admins">Admins</Link></li>
+          <li><Link to={ROUTES.USERS}>Users</Link></li>
+          <li><Link to={ROUTES.ADMINS}>Admins</Link></li>
           <li>{authButton}</li>
         </ul>
       </div>

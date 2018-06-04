@@ -17,9 +17,18 @@ export const API_ADDRESS = 'http://react-ssr-api.herokuapp.com';
 // API endpoints
 export const ENDPOINTS = {
   USERS: '/users',
-  ADMINS: '/admin',
+  ADMINS: '/admins',
   LOGOUT: '/logout',
   AUTH: '/auth/google',
   CURRENT_USER: '/current_user',
 };
 
+export const ROUTES = {
+  HOME: '/',
+  USERS: '/users',
+  ADMINS: '/admins',
+  LOGOUT: '/api/logout',
+  LOGIN: '/api/auth/google',
+  CURRENT_USER: '/api/current_user',
+  NO_AUTH: '/no_auth',
+};

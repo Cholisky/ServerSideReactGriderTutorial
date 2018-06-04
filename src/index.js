@@ -3,7 +3,7 @@ import express from 'express';
 import proxy from 'express-http-proxy';
 import { matchRoutes } from 'react-router-config';
 import Routes from './client/Routes';
-import { API_ADDRESS, LISTEN_PORT } from './constants/network_constants';
+import { API_ADDRESS, LISTEN_PORT, ROUTES } from './constants/network_constants';
 import createStore from './helpers/createStore';
 import renderer from './helpers/renderer';
 
@@ -28,15 +28,35 @@ app.use(express.static('public'));
 app.get('*', (req, res) => {
   const store = createStore(req);
 
-  // eslint-disable-next-line no-console
-  console.log('src/index store: ', store);
-  // eslint-disable-next-line arrow-body-style
-  const promises = matchRoutes(Routes, req.path).map(({ route }) => {
-    return route.loadData ? route.loadData(store) : null;
-  });
+  const promises = matchRoutes(Routes, req.path)
+  // eslint-disable-next-line no-confusing-arrow
+    .map(({ route }) => route.loadData ? route.loadData(store) : null)
+    // eslint-disable-next-line array-callback-return,consistent-return
+    .map((promise) => {
+      if (promise) {
+        return new Promise((resolve) => {
+          promise.then(resolve).catch(resolve);
+        });
+      }
+    });
 
+  // eslint-disable-next-line consistent-return
   Promise.all(promises).then(() => {
-    res.send(renderer(req, store));
+    const context = {};
+    const content = renderer(req, store, context);
+
+    if (context.url) {
+      if (context.url === ROUTES.NO_AUTH) {
+        return res.redirect(401, context.url);
+      }
+      return res.redirect(context.status || 301, context.url);
+    }
+
+    if (context.notFound) {
+      res.status(404);
+    }
+
+    res.send(content);
   });
 });
 
