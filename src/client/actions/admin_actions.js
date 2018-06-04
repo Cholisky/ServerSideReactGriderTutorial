@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import _ from 'lodash';
 import { ENDPOINTS } from '../../constants/network_constants';
 import { TYPES_ADMINS } from '../../constants/types';
 
@@ -12,7 +13,7 @@ const fetchAdmins = () => async (dispatch, getState, api) => {
     });
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log('user_actions error: ', error);
+    console.log('admin_actions error: ', _.get(error, 'response'));
   }
 };
 

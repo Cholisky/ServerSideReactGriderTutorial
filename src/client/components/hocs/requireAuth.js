@@ -10,8 +10,7 @@ export default (ChildComponent) => {
     render() {
       switch (this.props.auth) {
         case false:
-          return <Redirect to={ROUTES.NO_AUTH} status={401} state={{ status: 401 }} />;
-          // return <Redirect to={ROUTES.NO_AUTH} />;
+          return <Redirect to={ROUTES.NO_AUTH} />;
         case null:
           return <div>Loading...</div>;
         default:

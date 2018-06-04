@@ -3,7 +3,7 @@ import express from 'express';
 import proxy from 'express-http-proxy';
 import { matchRoutes } from 'react-router-config';
 import Routes from './client/Routes';
-import { API_ADDRESS, LISTEN_PORT, ROUTES } from './constants/network_constants';
+import { API_ADDRESS, LISTEN_PORT } from './constants/network_constants';
 import createStore from './helpers/createStore';
 import renderer from './helpers/renderer';
 
@@ -46,9 +46,6 @@ app.get('*', (req, res) => {
     const content = renderer(req, store, context);
 
     if (context.url) {
-      if (context.url === ROUTES.NO_AUTH) {
-        return res.redirect(401, context.url);
-      }
       return res.redirect(context.status || 301, context.url);
     }
 
